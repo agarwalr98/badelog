@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 import csv
 import requests
-import datetime
+import datetime, pathlib
 
 def get_year():
     	
@@ -47,7 +47,7 @@ def scrape_data(FirstYearBatch):
 			row_list=[]
 		#Writing into CSV file
 		# open(str(i) + "YearBatch"+ ".csv" , 'w' ) as file
-		f = csv.writer(open(str(pathlib.Path(__file__).parent.absolute()) + "/Scrapers/"   +str(year) + "YearStudent"+ ".csv", "w" ))
+		f = csv.writer(open(str(pathlib.Path("ImportData,py").parent.absolute()) + "/"   +str(year) + "YearStudent"+ ".csv", "w" ))
 		# print(heading)
 		f.writerow(heading)
 

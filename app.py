@@ -117,7 +117,7 @@ def login():
         email = request.form['email']
         password = request.form['password']   
         registeredUser = users_repository.get_email(email)
-        print(registeredUser)
+        # print(registeredUser)
 
         # set the connection to database.
         cur = mysql.connection.cursor()
@@ -201,7 +201,6 @@ def forgot():
         global string
         string = email
         registeredUser = users_repository.get_email(email)
-        print(registeredUser)
         if registeredUser is None:
             return render_template("not_registered_user.html")
         else:
@@ -314,36 +313,29 @@ def alumniLogin():
         position_in_opportunities = request.form['position_in_opportunities'] 
         field = request.form['field']
         alumni_filter = request.form
-        print(alumni_filter)
-        print("alumni filter")
-        print(alumni_filter['degree'])
+        
         cur = mysql.connection.cursor()
         query1 = ("SELECT EnrollmentNumber from Alumni A Where A.PassoutYear={} AND A.Degree='{}' AND A.CurrentState='{}' AND A.Branch='{}' ").format(passout_year, degree,current_state, branch)
         query2 = ("SELECT EnrollmentNumber from Worked_In W Where W.CompanyName='{}' AND W.Location='{}' AND W.Position='{}' AND W.Field_of_work='{}' ").format(company_name, location, position, field_of_work)
         query3 = ("SELECT EnrollmentNumber from Opportunities_for_hiring O Where O.Company='{}' AND O.Position='{}' AND O.Field='{}'").format(company, position_in_opportunities, field)
+        
         query1 = query1.replace("=All","!=''")
         query1 = query1.replace("='All'","!=''")
         query2 = query2.replace("=All","!=''")
         query2 = query2.replace("='All'","!=''")
         query3 = query3.replace("=All","!=''")
         query3 = query3.replace("='All'","!=''")
-        
-        print(query1)
-        print(query2)
-        print(query3)
+
         cur.execute(query1)
         result1 = cur.fetchall()
         cur.execute(query2)
         result2 = cur.fetchall()
         cur.execute(query3)
         result3 = cur.fetchall()
-        print(result1)
-        print(result2)
-        print(result3)
+
         global final_result
         final_result = (set(result1).intersection(result2))
         final_result = (set(final_result).intersection(result3))
-        print(final_result)
         # list1 = cur.execute(("SELECT EnrollmentNumber from Alumni A Where A.PassoutYear={} AND A.Degree='{}' AND A.CurrentState='Job' AND A.Branch='CSE' ").format(alumni_filter['passout_year'], alumni_filter['degree']))
         # print(list1)
         # list = cur.execute(("SELECT EnrollmentNumber from Alumni A Where A.PassoutYear={} AND A.Degree={} AND A.CurrentState=Job AND A.Branch=CSE ").format(alumni_filter['passout_year'], alumni_filter['degree'],alumni_filter['current_state'],alumni_filter['branch']))
@@ -444,11 +436,10 @@ def adminLogin():
             os.system('python ./Scrapers/ImportData.py')
             cur = mysql.connection.cursor()
             for student_batch in dictionary["All"]:
-                filename = str(pathlib.Path(__file__).parent.absolute()) + "/Scrapers/" + str(student_batch) +".csv"
+                filename = str(pathlib.Path('app.py').parent.absolute()) + "/Scrapers/" + str(student_batch) +".csv"
                 query = "LOAD DATA LOCAL INFILE '{}' INTO TABLE {}  FIELDS TERMINATED BY "'","'" LINES TERMINATED BY 'newline' IGNORE 1 ROWS;".format(filename , student_batch)
-                print(query)
                 result = cur.execute( query)
-                print(result)
+                # print(result)
             cur.close()
             output.append("Database has been updated!")
             return render_template("students.html", output=output)
