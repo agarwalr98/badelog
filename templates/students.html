@@ -38,6 +38,8 @@
 </head>
 
 <body >
+
+
 	<!-- Header -->
 	<header id="home">
 		<!-- Background Image -->
@@ -122,23 +124,24 @@
 					<h4 style="text-align:center;color:indigo">Choose options</h4>
 					<div class="col-sm-3 col-xs-6">
 						<!-- <form> -->
-								<h3>Year</h3>
-								<select name="Btech_year">
+								<h3>B.tech Year</h3>
+								<select name="btech_year">
+									<option value="All">All</option>
 									<option value="First">First year</option>
 									<option value="Second">Second year</option>
 									<option value="Third">Third year</option>
 									<option value="Fourth">Fourth year</option>
 		
 								</select>
-						<!-- </form> -->
+						<!-- </form> --> 
 					</div>
 		
-					<div class="col-sm-3 col-xs-6">
+					<div class="col-sm-2 col-xs-6">
 						<!-- <form> -->
 							<h3>Branch</h3>
 							<select name="branch">
 									<option value="All">All</option>
-									<option value="Computer Science and Engineering">CSE</option>
+									<option value="Computer Science & Engineering">CSE</option>
 									<option value="Electrical Engineering">EE</option>
 									<option value="Mechanical Engineering">ME</option>
 									<option value="Civil Engineering">CE</option>
@@ -147,7 +150,7 @@
 						<!-- </form> -->
 					</div>
 
-					<div class="col-sm-3 col-xs-6">
+					<div class="col-sm-2 col-xs-6">
 						
 							<h3>Room No.</h3>
 							<select name="room_no">
@@ -170,7 +173,7 @@
 						
 					</div>
 		
-								<div class="col-sm-3 col-xs-6">
+								<div class="col-sm-2 col-xs-6">
 										<!-- <form> -->
 												<h3>Hostels</h3>
 												<select name="hostels">
@@ -182,19 +185,53 @@
 								
 												</select>
 											<!-- </form> -->
-									</div>
-								
-				</div>
-				<input type="submit" style="color:black;background-color: white;font-size: 20px;margin-left:45%;margin-top:5%" value="submit">
-				</form>
-				{% for student in students %}
-				<h4>{{ student }}</h4>
-				{% endfor %}
+								</div>
+									
+					</div>
+				<input type="submit" name="submit" style="color:black;background-color: white;font-size: 20px;margin-left:45%;margin-top:5%" value="submit">
 				
+				<input type="submit" name="submit" style="color:black" value="Click here!">
+				</form>
+								
 		</div>
 	</div>
+{% if output %}
+{{output}}
+{% endif %}
+{% if students %}
+<h4 style="text-align:center">Querying Table</h4>
+  <h5 style="text-align:center">Table shown below is the result of your selected options.</h5>            
 
-	
+<table class="table table-bordered">
+	<thead>
+	<tr>
+		<th>Roll No</th>
+		<th>Name</th>
+		<th>Branch</th>
+		<th>Hostels</th>
+		<th>Room no</th>
+		<th>Personal Contact No</th>
+		<th>Emergency Contact Name</th>
+		<th>Landline/Mobile No</th>
+		<th>Mobile</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for student in students %}
+		<tr>
+			{% for value in student %}
+				<tr>
+					{% for i in value %}
+						<td>{{ i }}</td>
+					{% endfor %}
+				</tr>
+        	{% endfor %}
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endif %}
+
 </div>		
 	<!-- Numbers -->
 	<div id="numbers" class="section sm-padding">

@@ -1,0 +1,48 @@
+#library imports
+from bs4 import BeautifulSoup
+import csv
+import requests
+import datetime
+
+CurrentYear = datetime.datetime.now().year
+Currentmonth = datetime.datetime.now().month
+
+FirstYearBatch = CurrentYear 
+if Currentmonth>8:	
+	FirstYearBatch = CurrentYear
+else:
+	FirstYearBatch = CurrentYear -  1
+#collecting page
+page = requests.get("http://students.iitmandi.ac.in/~b17062/contacts/btech" + str(FirstYear)+.php")
+
+
+#Beautiful Soup Object
+soup = BeautifulSoup(page.text , 'lxml')
+
+new_list=[]
+row_list=[]
+heading=[]
+
+table_list = soup.select('tr')
+heading_list=table_list[8].select('h5')
+
+for x in heading_list:
+    heading.append(x.text)
+
+i=0
+for contact_list in table_list[9:] :
+    i+=1
+
+for j in range(9,(9+i-1)) :
+    x = table_list[j].select('td')
+    for y in x:
+        row_list.append(y.text)
+    new_list.append(row_list)
+    row_list=[]
+
+#Writing into CSV file
+f = csv.writer(open('btech2017.csv', 'w'))
+f.writerow(heading)
+
+for row in new_list:
+    f.writerow(row)

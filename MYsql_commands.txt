@@ -1,4 +1,5 @@
 
+-----Alumni -----------------------------
 create table Employer(CompanyName VARCHAR(20),Location VARCHAR(20),PRIMARY KEY(CompanyName,Location));
 
 create table Clubs_organisations(Name VARCHAR(20),Position VARCHAR(30),PRIMARY KEY(Name,Position));
@@ -24,3 +25,47 @@ Key(EnrollmentNumber) References Alumni(EnrollmentNumber) , Foreign Key(CompanyN
 create table Contributed_To(EnrollmentNumber VARCHAR(20), Name VARCHAR(20), Position VARCHAR(30), JoiningDate  VARCHAR(20), LeavingDate VARCHAR(20), Primary Key(EnrollmentNumber, Position, Name),
 Foreign Key(EnrollmentNumber) References Alumni(EnrollmentNumber), Foreign Key(Name,Position) References 
 Clubs_organisations(Name,Position));
+
+------Students ------------------
+create table FirstYearStudent(EnrollmentNUmber VARCHAR(50) PRIMARY KEY, Name VARCHAR(50) NOT NULL, Branch VARCHAR(50), Hostels VARCHAR(50), Room_No VARCHAR(10), Personnal_Contact_No VARCHAR(12), Emergency_Contact_Name VARCHAR(50), Landline_No VARCHAR(10), Emergency_Contact_No VARCHAR(12));
+
+create table SecondYearStudent(EnrollmentNUmber VARCHAR(50) PRIMARY KEY, Name VARCHAR(50) NOT NULL, Branch VARCHAR(50), Hostels VARCHAR(50), Room_No VARCHAR(10), Personnal_Contact_No VARCHAR(12), Emergency_Contact_Name VARCHAR(50), Landline_No VARCHAR(10), Emergency_Contact_No VARCHAR(12));
+
+create table ThirdYearStudent(EnrollmentNUmber VARCHAR(50) PRIMARY KEY, Name VARCHAR(50) NOT NULL, Branch VARCHAR(50), Hostels VARCHAR(50), Room_No VARCHAR(10), Personnal_Contact_No VARCHAR(12), Emergency_Contact_Name VARCHAR(50), Landline_No VARCHAR(10), Emergency_Contact_No VARCHAR(12));
+
+create table FourthYearStudent(EnrollmentNUmber VARCHAR(50) PRIMARY KEY, Name VARCHAR(50) NOT NULL, Branch VARCHAR(50), Hostels VARCHAR(50), Room_No VARCHAR(10), Personnal_Contact_No VARCHAR(12), Emergency_Contact_Name VARCHAR(50), Landline_No VARCHAR(10), Emergency_Contact_No VARCHAR(12));
+
+
+
+---helpful commands -----
+LOAD DATA LOCAL INFILE  
+'/home/rohitagarwal/Documents/badelog/Scrapers/FirstYearBatch.csv'
+INTO TABLE FirstYearStudent  
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE  
+'/home/rohitagarwal/Documents/badelog/Scrapers/SecondYearBatch.csv'
+INTO TABLE SecondYearStudent  
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE  
+'/home/rohitagarwal/Documents/badelog/Scrapers/ThirdYearBatch.csv'
+INTO TABLE ThirdYearStudent  
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+LOAD DATA LOCAL INFILE  
+'/home/rohitagarwal/Documents/badelog/Scrapers/FourthYearBatch.csv'
+INTO TABLE FourthYearStudent  
+FIELDS TERMINATED BY ',' 
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;

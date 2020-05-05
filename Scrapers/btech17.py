@@ -1,10 +1,10 @@
-#library imports
+# library import
 from bs4 import BeautifulSoup
 import csv
 import requests
 
 #collecting page
-page = requests.get("https://insite.iitmandi.ac.in/directory/students/btech2017.php")
+page = requests.get("http://students.iitmandi.ac.in/~b17062/contacts/btech2018.php")
 
 #Beautiful Soup Object
 soup = BeautifulSoup(page.text , 'lxml')
@@ -36,3 +36,4 @@ f.writerow(heading)
 
 for row in new_list:
     f.writerow(row)
+
