@@ -11,7 +11,7 @@ audioread==2.1.9
 awscli==1.18.69
 azure-cognitiveservices-vision-face==0.4.0
 azure-common==1.1.23
-Babel==2.7.0
+Babel==2.9.1
 backcall==0.1.0
 bcrypt==3.1.6
 beautifulsoup4==4.9.0
