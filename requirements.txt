@@ -272,7 +272,7 @@ stevedore==1.30.1
 system-service==0.3
 systemd-python==234
 tensorboard==1.14.0
-tensorflow==1.14.0
+tensorflow==2.7.2
 tensorflow-estimator==1.14.0
 termcolor==1.1.0
 terminado==0.8.3
