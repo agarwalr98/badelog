@@ -230,7 +230,7 @@ QtPy==1.9.0
 recommonmark==0.6.0
 regex==2020.4.4
 reportbug===7.1.8ubuntu1
-reportlab==3.4.0
+reportlab==3.5.55
 requests==2.23.0
 requests-oauthlib==1.2.0
 requests-unixsocket==0.1.5
